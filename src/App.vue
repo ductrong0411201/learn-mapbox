@@ -1,47 +1,53 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div id="app">
+    <!--Navbar Here -->
+    <div>
+      <nav>
+        <div class="header">
+          <h3>Geocoder</h3>
+        </div>
+      </nav>
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+    <!--Index Page Here -->
+    <index />
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
+<script>
+import index from "./components/Index.vue";
+export default {
+  name: "App",
+  components: {
+    index,
+  },
+};
+</script>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+html,
+body {
+  background: #fafcfd;
+  margin: 0;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+nav {
+  background: #ffffff;
+  box-shadow: 0px 2px 5px rgba(0, 58, 78, 0.15);
+}
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 50px;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.header h3 {
+  color: #1f2a53;
+  font-weight: 600;
 }
 </style>
