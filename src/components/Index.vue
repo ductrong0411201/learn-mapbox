@@ -127,9 +127,9 @@ export default {
 </script>
 
 <style scoped>
-.main {
-  /* padding: 45px 50px; */
-}
+/* .main {
+  padding: 45px 50px;
+} */
 .flex {
   display: flex;
   flex-direction: row;
