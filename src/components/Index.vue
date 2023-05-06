@@ -7,7 +7,7 @@
       </div>
 
       <!-- Coordinates Display here -->
-      <div class="dislpay-arena">
+      <!-- <div class="dislpay-arena">
         <div class="coordinates-header">
           <h3>Current Coordinates</h3>
           <p>Latitude: {{ center[0] }}</p>
@@ -39,7 +39,7 @@
             Get Location
           </button>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -127,9 +127,9 @@ export default {
 </script>
 
 <style scoped>
-.main {
+/* .main {
   padding: 45px 50px;
-}
+} */
 .flex {
   display: flex;
   flex-direction: row;
@@ -140,7 +140,9 @@ export default {
   width: 65%;
 }
 #map {
+  margin: 20px;
   height: 70vh;
+  width: 50vw;
 }
 .dislpay-arena {
   background: #ffffff;
