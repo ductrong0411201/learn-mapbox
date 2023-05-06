@@ -56,7 +56,7 @@ export default {
       loading: false,
       location: "",
       access_token: process.env.VUE_APP_MAP_ACCESS_TOKEN,
-      center: [0, 0],
+      center: [105.3230291, 20],
       map: {},
     };
   },
@@ -73,13 +73,13 @@ export default {
           container: "map",
           style: "mapbox://styles/mapbox/streets-v11",
           center: this.center,
-          zoom: 3,
+          zoom: 8,
         });
 
         let geocoder =  new MapboxGeocoder({
             accessToken: this.access_token,
             mapboxgl: mapboxgl,
-            marker: false,
+            marker: true,
           }); 
 
         this.map.addControl(geocoder);
@@ -115,13 +115,6 @@ export default {
         console.log(err);
       }
     },
-    copyLocation() {
-      if (this.location) {
-        navigator.clipboard.writeText(this.location);
-        alert("Location Copied")
-      }
-      return;
-    },
   },
 };
 </script>
@@ -137,12 +130,11 @@ export default {
 }
 
 .map-holder {
-  width: 65%;
+  width: 100%;
 }
 #map {
-  margin: 20px;
   height: 70vh;
-  width: 50vw;
+  width: 100%;
 }
 .dislpay-arena {
   background: #ffffff;
