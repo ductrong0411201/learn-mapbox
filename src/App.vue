@@ -3,10 +3,12 @@
     <div>
       <nav>
         <div class="header">
-          <h3>Geocoder</h3>
+          <h3>DASHBOARD</h3>
         </div>
       </nav>
+      <v-divider></v-divider>
     </div>
+
     <v-main class="v-main">
       <router-view></router-view>
     </v-main>
@@ -14,7 +16,6 @@
 </template>
 
 <script>
-
 export default {
   name: "App",
   data: () => ({}),
@@ -27,6 +28,9 @@ export default {
 };
 </script>
 <style>
+.card {
+  background-color: #fff;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -40,7 +44,6 @@ body {
 
 nav {
   background: #ffffff;
-  box-shadow: 0px 2px 5px rgba(0, 58, 78, 0.15);
 }
 .header {
   display: flex;
@@ -61,11 +64,11 @@ nav {
   color: #1f2a53;
   font-weight: 800;
 }
- 
+
 .v-main {
-    display: flex;
-    flex: 1 0 auto;
-    max-width: 100%;
-    transition: .2s cubic-bezier(.4,0,.2,1);
+  display: flex;
+  flex: 1 0 auto;
+  max-width: 100%;
+  transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 </style>
