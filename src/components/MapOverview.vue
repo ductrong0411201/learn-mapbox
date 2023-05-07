@@ -12,7 +12,7 @@
 <script>
 import mapboxgl from "mapbox-gl";
 // import axios from "axios";
-// import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
+import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 
 export default {
@@ -23,6 +23,11 @@ export default {
       access_token: process.env.VUE_APP_MAP_ACCESS_TOKEN,
       center: [105.3230291, 20],
       map: {},
+      marker: null,
+      markerstyle: {
+        draggable: true,
+        color: "#D80739",
+      },
     };
   },
 
@@ -40,19 +45,54 @@ export default {
           center: this.center,
           zoom: 8,
         });
+        let geocoder = new MapboxGeocoder({
+          accessToken: this.access_token,
+          mapboxgl: mapboxgl,
+          marker: true,
+        });
+
+        this.map.addControl(geocoder);
         this.map.addControl(new mapboxgl.NavigationControl());
+        this.map.addControl(
+          new mapboxgl.GeolocateControl({
+            positionOptions: {
+              enableHighAccuracy: true,
+            },
+            trackUserLocation: true,
+            showUserHeading: true,
+          })
+        );
+
+        geocoder.on("result", (e) => {
+          const marker = new mapboxgl.Marker(this.markerstyle)
+            .setLngLat(e.result.center)
+            .addTo(this.map);
+          this.center = e.result.center;
+
+          marker.on("dragend", (e) => {
+            this.center = Object.values(e.target.getLngLat());
+          });
+        });
+        this.map.on("click", this.handleMapClick);
       } catch (err) {
         console.log("map error", err);
       }
+    },
+    handleMapClick(event) {
+      if (this.marker) {
+        this.marker.remove();
+      }
+
+      const { lngLat } = event;
+      this.marker = new mapboxgl.Marker(this.markerstyle)
+        .setLngLat(lngLat)
+        .addTo(this.map);
     },
   },
 };
 </script>
 
 <style scoped>
-.main {
-  padding: 45px 50px;
-}
 .flex {
   display: flex;
   flex-direction: row;
@@ -63,7 +103,7 @@ export default {
   width: 100%;
 }
 #map {
-  height: 100vh;
+  height: calc(100vh - 128px);
   width: 100%;
 }
 </style>
