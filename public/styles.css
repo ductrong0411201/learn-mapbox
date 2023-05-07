@@ -1,0 +1,24 @@
+html {
+  overflow-y: hidden !important;
+}
+.mapboxgl-ctrl-scale {
+  font-size: 12px !important;
+  text-align: center;
+  padding-top: 5px;
+  width: 75px !important;
+  background-color: #fff;
+  border-radius: 30px;
+  border: 1px solid #893ff2 !important;
+  box-sizing: border-box;
+}
+.mapboxgl-ctrl-bottom-left,
+.mapboxgl-ctrl-bottom-right,
+.mapboxgl-ctrl-top-left,
+.mapboxgl-ctrl-top-right {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+}
+.mapboxgl-map {
+  font: 12px/20px Helvetica Neue, Arial, Helvetica, sans-serif;
+}

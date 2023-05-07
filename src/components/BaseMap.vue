@@ -14,7 +14,7 @@ import mapboxgl from "mapbox-gl";
 // import axios from "axios";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
-
+import RulerControl from "mapbox-gl-ruler-control";
 export default {
   data() {
     return {
@@ -52,7 +52,10 @@ export default {
         });
 
         this.map.addControl(geocoder);
-        this.map.addControl(new mapboxgl.NavigationControl());
+        this.map.addControl(new mapboxgl.ScaleControl(), "bottom-right");
+        this.map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
+        const ruler = new RulerControl();
+        this.map.addControl(ruler, "bottom-right");
         this.map.addControl(
           new mapboxgl.GeolocateControl({
             positionOptions: {
@@ -60,7 +63,8 @@ export default {
             },
             trackUserLocation: true,
             showUserHeading: true,
-          })
+          }),
+          "bottom-right"
         );
 
         geocoder.on("result", (e) => {
@@ -103,7 +107,7 @@ export default {
   width: 100%;
 }
 #map {
-  height: calc(100vh - 128px);
+  min-height: calc(100vh - 128px);
   width: 100%;
 }
 </style>

@@ -4,24 +4,28 @@
       <nav>
         <div class="header">
           <v-card class="card">
-            <v-btn text @click="openOverview">OVERVIEW</v-btn>
-            <v-btn text @click="openMapView">MAP VIEW</v-btn>
+            <v-btn :color="overview ? 'red' : ''" text @click="openOverview"
+              >OVERVIEW</v-btn
+            >
+            <v-btn :color="mapview ? 'red' : ''" text @click="openMapView"
+              >MAP VIEW</v-btn
+            >
           </v-card>
         </div>
       </nav>
     </div>
     <div class="main">
       <OverviewContainer v-if="overview"></OverviewContainer>
-      <map-overview v-if="mapview"></map-overview>
+      <mapview-container v-if="mapview"></mapview-container>
     </div>
   </div>
 </template>
 
 <script>
 import OverviewContainer from "@/components/Overview/OverviewContainer.vue";
-import MapOverview from "@/components/MapOverview.vue";
+import MapviewContainer from "@/components/Mapview/MapviewContainer.vue";
 export default {
-  components: { OverviewContainer, MapOverview },
+  components: { OverviewContainer, MapviewContainer },
   data: () => {
     return {
       mapview: false,
@@ -36,7 +40,7 @@ export default {
     openOverview() {
       this.mapview = false;
       this.overview = true;
-    }
+    },
   },
 };
 </script>
