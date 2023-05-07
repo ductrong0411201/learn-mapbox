@@ -15,17 +15,22 @@
       </nav>
     </div>
     <div class="main">
-      <OverviewContainer v-if="overview"></OverviewContainer>
+      <DashboardOverview v-if="overview"></DashboardOverview>
+      <!-- <OverviewContainer v-if="overview"></OverviewContainer> -->
       <mapview-container v-if="mapview"></mapview-container>
     </div>
   </div>
 </template>
 
 <script>
-import OverviewContainer from "@/components/Overview/OverviewContainer.vue";
+// import OverviewContainer from "@/components/Overview/OverviewContainer.vue";
+import DashboardOverview from "@/components/Overview/DashboardOverview.vue";
 import MapviewContainer from "@/components/Mapview/MapviewContainer.vue";
 export default {
-  components: { OverviewContainer, MapviewContainer },
+  components: { 
+    // OverviewContainer, 
+    MapviewContainer , 
+    DashboardOverview },
   data: () => {
     return {
       mapview: false,
