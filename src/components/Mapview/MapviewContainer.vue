@@ -33,6 +33,7 @@
     <base-map
       style="height: calc(100vh - 128px)"
       :isCompare="isCompare"
+      :isMapview="isMapview"
     ></base-map>
   </div>
 </template>
@@ -46,6 +47,7 @@ export default {
       isOverlay: true,
       isCompare: false,
       isSync: false,
+      isMapview: true,
     };
   },
   methods: {

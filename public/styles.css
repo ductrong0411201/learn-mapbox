@@ -28,3 +28,16 @@ html {
   background-color: #d1b9f1;
   border: 1px solid rgb(137, 63, 242);
 }
+
+.mapbox-gl-draw_ctrl-draw-btn {
+  position: absolute;
+  bottom: -97px;
+  right: 45px;
+  color: black !important;
+  background-color: #fff !important;
+}
+.mapboxgl-ctrl-ruler {
+  position: absolute;
+  bottom: 32px;
+  right: 92px;
+}

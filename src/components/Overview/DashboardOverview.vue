@@ -43,7 +43,7 @@
           </div>
           <div class="map">
             <div style="height: 300px">
-              <BaseMap></BaseMap>
+              <BaseMap :isDashboard="isDashboard"></BaseMap>
               <!-- <MapviewContainer></MapviewContainer> -->
             </div>
             <h4 class="color-dashboard">
@@ -82,7 +82,8 @@ export default {
   data() {
     return {
       tab: null,
-      resultData: null
+      resultData: null,
+      isDashboard: true,
     }
   },
   async mounted() {
@@ -174,7 +175,7 @@ export default {
 }
 </script>
   
-<style>
+<style scoped>
 .layout {
   background-color: rgb(244, 236, 253);
   padding-bottom: 10px;
