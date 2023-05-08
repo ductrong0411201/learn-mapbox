@@ -4,10 +4,10 @@
       <nav>
         <div class="header">
           <v-card class="card">
-            <v-btn :color="overview ? 'red' : ''" text @click="openOverview"
+            <v-btn :class="overview ? 'btn-border' : ''" text @click="openOverview"
               >OVERVIEW</v-btn
             >
-            <v-btn :color="mapview ? 'red' : ''" text @click="openMapView"
+            <v-btn :class="mapview ? 'btn-border' : ''" text @click="openMapView"
               >MAP VIEW</v-btn
             >
           </v-card>

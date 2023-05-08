@@ -22,3 +22,9 @@ html {
 .mapboxgl-map {
   font: 12px/20px Helvetica Neue, Arial, Helvetica, sans-serif;
 }
+
+.btn-border {
+  color: #893ff2;
+  background-color: #d1b9f1;
+  border: 1px solid rgb(137, 63, 242);
+}

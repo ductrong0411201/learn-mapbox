@@ -26,7 +26,7 @@ export default {
                 .append("g")
                 .attr("transform",
                     "translate(" + margin.left + "," + margin.top + ")");
-            console.log(this.resultData)
+            // console.log(this.resultData)
             var dataTest = this.resultData.flat();
             var subgroups = dataTest.map(x => x.label);
             var colorTest = dataTest.map(x => x.color[0]);
