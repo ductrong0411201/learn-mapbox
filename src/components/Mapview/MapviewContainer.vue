@@ -1,5 +1,5 @@
 <template>
-  <base-map></base-map>
+  <base-map style="height: calc(100vh - 128px)"></base-map>
 </template>
 
 <script>

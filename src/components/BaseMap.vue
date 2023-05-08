@@ -101,13 +101,20 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 100%;
+  height: 100%;
 }
 
 .map-holder {
   width: 100%;
+  height: 100%;
+}
+.main{
+  height: 100%
 }
 #map {
-  min-height: calc(100vh - 128px);
+  /* min-height: calc(40vh - 128px); */
+  height: 100%;
   width: 100%;
 }
 </style>

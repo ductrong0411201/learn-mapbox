@@ -42,6 +42,13 @@
             </v-card>
           </div>
           <div class="map">
+            <div style="height: 300px">
+              <BaseMap></BaseMap>
+              <!-- <MapviewContainer></MapviewContainer> -->
+            </div>
+            <h4 class="color-dashboard">
+              Recorded trends of Green Cover Change
+            </h4>
             <div>
               <!-- <RecordedTrend :resultData="resultData"></RecordedTrend> -->
               <div id="my_dataviz"></div>
@@ -55,6 +62,8 @@
   
 <script>
 import * as d3 from 'd3';
+import BaseMap from '../BaseMap.vue';
+// import MapviewContainer from '../Mapview/MapviewContainer.vue';
 import OverviewContainer from "./OverviewContainer.vue";
 import GreenCoverVue from './GreenCover.vue'
 import PlantDesityVue from './PlantDesity.vue'
@@ -66,6 +75,8 @@ export default {
     PlantDesityVue,
     PlantHealthVue,
     OverviewContainer,
+    BaseMap,
+    // MapviewContainer,
     // RecordedTrend
   },
   data() {
@@ -81,7 +92,7 @@ export default {
     async test() {
       const response = await fetch("https://greencover.eofactory.ai/api/v1/imageries/statistics?month=08&compare_month=08&compare_year=2022&year=2022&source=sentinel&overview_type=overall_green_cover&aoi_id=218");
       const jsonData = await response.json();
-      jsonData.data.green_cover_change_in_year.green_area['color'] = ['blue']
+      jsonData.data.green_cover_change_in_year.green_area['color'] = ['#409eff']
       jsonData.data.green_cover_change_in_year.green_area = [jsonData.data.green_cover_change_in_year.green_area]
       jsonData.data.green_cover_change_in_year.green_area['group'] = 'Green Cover'
       jsonData.data.green_cover_change_in_year.plant_health['group'] = 'Plant Health'
@@ -89,7 +100,7 @@ export default {
       var result = [jsonData.data.green_cover_change_in_year.green_area, jsonData.data.green_cover_change_in_year.green_density, jsonData.data.green_cover_change_in_year.plant_health]
       var margin = { top: 10, right: 30, bottom: 20, left: 50 },
         width = 460 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+        height = 300 - margin.top - margin.bottom;
 
       // append the svg object to the body of the page
       var svg = d3.select("#my_dataviz")
@@ -176,7 +187,7 @@ export default {
 
 .overview {
   margin: 20px 40px 0px;
-  height: calc(100vh - 130px);
+  height: calc(100vh - 150px);
   background: rgb(244, 236, 253);
   border-radius: 0px;
   border-radius: 10px;
@@ -195,23 +206,32 @@ export default {
 }
 
 .lot {
-  height: calc(100vh - 230px);
+  height: calc(100vh - 240px);
   border-radius: 10px;
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12) !important;
-  padding: 12px !important;
-  margin: 15px;
+  /* padding: 12px !important; */
+  margin: 10px;
   display: flex;
+  justify-content: space-between;
 }
 
 .dashboard {
-  height: 100%;
+  margin: 10px;
+  height: calc(100vh - 300px);
   width: 50%;
   border-radius: 11px 0px 0px 11px;
   background-color: rgb(247, 243, 248);
 }
 
-/* .map{
-    height: calc(100% - 5px);
-    width: 50%;
-  } */
+.map {
+  margin: 10px;
+  height: 100%;
+  width: 50%;
+  /* display: flex; */
+}
+
+.color-dashboard {
+  margin: 20px;
+  color: rgb(137, 63, 242)
+}
 </style>
