@@ -42,54 +42,48 @@ export default {
     };
   },
   mounted() {
-    // this.createMap();
-    this.createMapCompare();
-  },
-  computed: {
-    compareMod() {
-      if (this.isCompare) {
-        this.createMapCompare();
-      }
-      return this.isCompare;
-    },
+    this.createMap();
   },
   methods: {
-    createMap() {
+    createMap(isCompare) {
       try {
-        mapboxgl.accessToken = this.access_token;
-        this.map = new mapboxgl.Map({
-          container: "map",
-          style: "mapbox://styles/mapbox/streets-v11",
-          attributionControl: false,
-          center: this.center,
-          zoom: 10.5,
-        });
-        this.map.addControl(new mapboxgl.ScaleControl(), "bottom-right");
-        this.map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
-
-        if (this.isMapview) {
-          const ruler = new RulerControl();
-          this.map.addControl(ruler, "bottom-right");
-          const draw = new MapboxDraw({
-            displayControlsDefault: false,
-            controls: {
-              polygon: true,
-            },
-            defaultMode: "draw_polygon",
+          mapboxgl.accessToken = this.access_token;
+          this.map = new mapboxgl.Map({
+            container: "map",
+            style: "mapbox://styles/mapbox/streets-v11",
+            attributionControl: false,
+            center: this.center,
+            zoom: 10.5,
           });
-          this.map.addControl(draw, "bottom-right");
-        }
-        this.map.addControl(
-          new mapboxgl.GeolocateControl({
-            positionOptions: {
-              enableHighAccuracy: true,
-            },
-            trackUserLocation: true,
-            showUserHeading: true,
-          }),
-          "bottom-right"
-        );
-        this.map.on("click", this.handleMapClick);
+          this.map.addControl(new mapboxgl.ScaleControl(), "bottom-right");
+          this.map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
+
+          if (this.isMapview) {
+            const ruler = new RulerControl();
+            this.map.addControl(ruler, "bottom-right");
+            const draw = new MapboxDraw({
+              displayControlsDefault: false,
+              controls: {
+                polygon: true,
+              },
+              defaultMode: "draw_polygon",
+            });
+            this.map.addControl(draw, "bottom-right");
+          }
+          this.map.addControl(
+            new mapboxgl.GeolocateControl({
+              positionOptions: {
+                enableHighAccuracy: true,
+              },
+              trackUserLocation: true,
+              showUserHeading: true,
+            }),
+            "bottom-right"
+          );
+          this.map.on("click", this.handleMapClick);
+          if (isCompare && this.isMapview) {
+            this.createMapCompare();
+          }
       } catch (err) {
         console.log("map error", err);
       }
@@ -98,44 +92,23 @@ export default {
       if (this.marker) {
         this.marker.remove();
       }
-
       const { lngLat } = event;
       this.marker = new mapboxgl.Marker(this.markerstyle)
         .setLngLat(lngLat)
         .addTo(this.map);
     },
     createMapCompare() {
-      // mapboxgl.accessToken = this.access_token;
-      // const mapCompare = new mapboxgl.Map({
-      //   container: "map-compare",
-      //   style: "mapbox://styles/mapbox/streets-v11",
-      //   center: this.center,
-      //   zoom: 10.5,
-      // });
-      // const container = "#comparison-container";
-      // this.mapCompare = new mapboxCompare(this.map, mapCompare, container, {
-      //   mousemove: true,
-      //   slider: true,
-      // });
+      this.compareMap = {};
       mapboxgl.accessToken = this.access_token;
-      const beforeMap = new mapboxgl.Map({
-        container: "map",
-        style: "mapbox://styles/mapbox/streets-v11",
-        attributionControl: false,
-        center: [0, 0],
-        zoom: 0,
-      });
-
-      const afterMap = new mapboxgl.Map({
+      this.mapCompare = new mapboxgl.Map({
         container: "map-compare",
         style: "mapbox://styles/mapbox/satellite-streets-v12",
         attributionControl: false,
-        center: [0, 0],
-        zoom: 0,
+        center: this.center,
+        zoom: 10.5,
       });
       const container = "#comparison-container";
-
-      this.map = new MapboxCompare(beforeMap, afterMap, container, {});
+      this.map = new MapboxCompare(this.mapCompare, this.map, container, {});
     },
   },
 };

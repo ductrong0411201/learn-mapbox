@@ -7,32 +7,31 @@
           <v-btn
             text
             :class="isOverlay ? 'btn-mod btn-border' : 'btn-mod'"
-            @click="openOverlay"
+            @click="openOverlay()"
             >OVERLAY</v-btn
           >
           <v-btn
             text
             :class="isCompare ? 'btn-mod btn-border' : 'btn-mod'"
-            @click="openSlide"
+            @click="openSlide()"
             >SLIDE</v-btn
           >
           <v-btn
             text
             :class="isSync ? 'btn-mod btn-border' : 'btn-mod'"
-            @click="openSync"
+            @click="openSync()"
             >SYNC</v-btn
           >
         </div>
       </v-card>
     </div>
     <v-btn class="btn-layers" icon
-      ><v-icon color="white"
-        >mdi-layers</v-icon
-      ></v-btn
+      ><v-icon color="white">mdi-layers</v-icon></v-btn
     >
     <base-map
+      ref="map"
       style="height: calc(100vh - 128px)"
-      :isCompare="isCompare"
+      :isCompare="isSlide"
       :isMapview="isMapview"
     ></base-map>
   </div>
@@ -55,11 +54,13 @@ export default {
       this.isOverlay = true;
       this.isCompare = false;
       this.isSync = false;
+      this.$refs.map.createMap(this.isCompare);
     },
     openSlide() {
       this.isOverlay = false;
       this.isCompare = true;
       this.isSync = false;
+      this.$refs.map.createMap(this.isCompare);
     },
     openSync() {
       this.isOverlay = false;
