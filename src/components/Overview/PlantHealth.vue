@@ -42,7 +42,7 @@ export default {
     async getDate() {
       const response = await fetch("https://greencover.eofactory.ai/api/v1/imageries/months?source=sentinel&aoi_id=218");
       const jsonData = await response.json();
-      console.log(jsonData);
+    //   console.log(jsonData);
       this.dateTime=jsonData.data
     }
   }

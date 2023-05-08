@@ -15,6 +15,7 @@
     "element-ui": "^2.15.12",
     "es6-promise": "^4.2.8",
     "mapbox-gl": "^2.1.1",
+    "mapbox-gl-compare": "^0.4.1",
     "mapbox-gl-controls": "^2.3.5",
     "mapbox-gl-ruler-control": "^0.0.2",
     "vue": "^2.6.14",
