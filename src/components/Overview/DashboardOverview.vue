@@ -9,34 +9,34 @@
           <div class="dashboard">
             <v-card>
               <v-tabs v-model="tab" grow>
-                <v-tab href="#tab-1">
+                <v-tab href="#tab-1" class="tab">
                   Green Cover
                 </v-tab>
 
-                <v-tab href="#tab-2">
+                <v-tab href="#tab-2" class="tab">
                   Plant Health
                 </v-tab>
 
-                <v-tab href="#tab-3">
+                <v-tab href="#tab-3" class="tab">
                   Green Density
                 </v-tab>
               </v-tabs>
 
               <v-tabs-items v-model="tab">
-                <v-tab-item :value="'tab-1'">
-                  <v-card flat>
+                <v-tab-item :value="'tab-1'" class="tab">
+                  <!-- <v-card flat class="tab"> -->
                     <GreenCoverVue></GreenCoverVue>
-                  </v-card>
+                  <!-- </v-card> -->
                 </v-tab-item>
-                <v-tab-item :value="'tab-2'">
-                  <v-card flat>
+                <v-tab-item :value="'tab-2'" class="tab">
+                  <!-- <v-card flat > -->
                     <PlantHealthVue></PlantHealthVue>
-                  </v-card>
+                  <!-- </v-card> -->
                 </v-tab-item>
-                <v-tab-item :value="'tab-3'">
-                  <v-card flat>
+                <v-tab-item :value="'tab-3'" class="tab">
+                  <!-- <v-card flat> -->
                     <PlantDesityVue></PlantDesityVue>
-                  </v-card>
+                  <!-- </v-card> -->
                 </v-tab-item>
               </v-tabs-items>
             </v-card>
@@ -209,29 +209,27 @@ export default {
   height: calc(100vh - 240px);
   border-radius: 10px;
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12) !important;
-  /* padding: 12px !important; */
   margin: 10px;
   display: flex;
   justify-content: space-between;
 }
 
 .dashboard {
-  margin: 10px;
-  height: calc(100vh - 300px);
+  padding: 10px;
   width: 50%;
-  border-radius: 11px 0px 0px 11px;
-  background-color: rgb(247, 243, 248);
 }
 
 .map {
   margin: 10px;
   height: 100%;
   width: 50%;
-  /* display: flex; */
 }
 
 .color-dashboard {
   margin: 20px;
   color: rgb(137, 63, 242)
+}
+.tab{
+  background-color: #f5dcf438;
 }
 </style>
