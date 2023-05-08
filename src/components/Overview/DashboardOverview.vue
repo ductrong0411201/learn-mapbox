@@ -25,17 +25,17 @@
               <v-tabs-items v-model="tab">
                 <v-tab-item :value="'tab-1'" class="tab">
                   <!-- <v-card flat class="tab"> -->
-                    <GreenCoverVue></GreenCoverVue>
+                    <GreenCoverVue :data="this.resultData.compare_result" :result="this.resultData.result"></GreenCoverVue>
                   <!-- </v-card> -->
                 </v-tab-item>
                 <v-tab-item :value="'tab-2'" class="tab">
                   <!-- <v-card flat > -->
-                    <PlantHealthVue></PlantHealthVue>
+                    <PlantHealthVue :plantHealth="this.resultData.green_cover_change_in_year.plant_health" :changePlant="this.resultData.plant_health"></PlantHealthVue>
                   <!-- </v-card> -->
                 </v-tab-item>
                 <v-tab-item :value="'tab-3'" class="tab">
                   <!-- <v-card flat> -->
-                    <PlantDesityVue></PlantDesityVue>
+                    <PlantDesityVue :plantHealth="this.resultData.green_cover_change_in_year.green_density" :changePlant="this.resultData.green_density"></PlantDesityVue>
                   <!-- </v-card> -->
                 </v-tab-item>
               </v-tabs-items>
@@ -82,23 +82,28 @@ export default {
   data() {
     return {
       tab: null,
+      result:null,
       resultData: null,
       isDashboard: true,
     }
   },
   async mounted() {
-    await this.test()
+    await this.getData()
+    await this.drawDasshboard()
   },
   methods: {
-    async test() {
-      const response = await fetch("https://greencover.eofactory.ai/api/v1/imageries/statistics?month=08&compare_month=08&compare_year=2022&year=2022&source=sentinel&overview_type=overall_green_cover&aoi_id=218");
+    async getData(){
+      const response = await fetch("https://greencover.eofactory.ai/api/v1/imageries/statistics?month=02&compare_month=01&compare_year=2023&year=2023&source=sentinel&overview_type=overall_green_cover&aoi_id=215");
       const jsonData = await response.json();
+      this.resultData=jsonData.data
       jsonData.data.green_cover_change_in_year.green_area['color'] = ['#409eff']
       jsonData.data.green_cover_change_in_year.green_area = [jsonData.data.green_cover_change_in_year.green_area]
       jsonData.data.green_cover_change_in_year.green_area['group'] = 'Green Cover'
       jsonData.data.green_cover_change_in_year.plant_health['group'] = 'Plant Health'
       jsonData.data.green_cover_change_in_year.green_density['group'] = 'Plant Density'
-      var result = [jsonData.data.green_cover_change_in_year.green_area, jsonData.data.green_cover_change_in_year.green_density, jsonData.data.green_cover_change_in_year.plant_health]
+      this.result = [jsonData.data.green_cover_change_in_year.green_area, jsonData.data.green_cover_change_in_year.green_density, jsonData.data.green_cover_change_in_year.plant_health]
+    },
+    async drawDasshboard() {
       var margin = { top: 10, right: 30, bottom: 20, left: 50 },
         width = 460 - margin.left - margin.right,
         height = 300 - margin.top - margin.bottom;
@@ -112,16 +117,16 @@ export default {
         .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
-      var dataTest = result.flat();
+      var dataTest = this.result.flat();
       var subgroups = dataTest.map(x => x.label);
       var colorTest = dataTest.map(x => x.color[0]);
-      result.forEach(item => {
+      this.result.forEach(item => {
         item.forEach(e => {
           item[e.label] = e.data[0]
         })
       })
 
-      var groups = result.map(x => x.group)
+      var groups = this.result.map(x => x.group)
       // [
       //   "Green Cover",
       //   "Plant Health",
@@ -139,7 +144,7 @@ export default {
 
       // Add Y axis
       var y = d3.scaleLinear()
-        .domain([0, 350])
+        .domain([0, 50])
         .range([height, 0]);
       svg.append("g")
         .call(d3.axisLeft(y));
@@ -151,7 +156,7 @@ export default {
 
       // stack the data? --> stack per subgroup
       var stackedData = d3.stack()
-        .keys(subgroups)(result)
+        .keys(subgroups)(this.result)
       // Show the bars
       svg.append("g")
         .selectAll("g")
