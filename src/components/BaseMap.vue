@@ -13,7 +13,6 @@
 <script>
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-// window.mapboxgl = mapboxgl
 import MapboxCompare from "mapbox-gl-compare";
 import "mapbox-gl-compare/dist/mapbox-gl-compare.css";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
@@ -25,7 +24,8 @@ export default {
     isCompare: { type: Boolean, default: false },
     isDashboard: { type: Boolean, default: false },
     isMapview: { type: Boolean, default: false },
-    aois: {}
+    aois: { type: Array, default: () => [] },
+    selected: { type: String },
   },
   data() {
     return {
@@ -33,6 +33,7 @@ export default {
       location: "",
       access_token: process.env.VUE_APP_MAP_ACCESS_TOKEN,
       center: [103.8088623, 1.3459122],
+      zoom: 9,
       map: {},
       marker: null,
       markerstyle: {
@@ -47,6 +48,31 @@ export default {
     this.createMap();
   },
   watch: {
+    selected() {
+      if (this.selected == "Jaipur") {
+        this.center = [75.8031, 26.8948];
+        this.zoom = 9;
+      } else if (this.selected == "Jodhpur") {
+        this.center = [73.017110, 26.1703594];
+        this.zoom = 8;
+      } else if (this.selected == "Kota") {
+        this.center = [76.1082, 25.1094];
+        this.zoom = 7
+      } else if (this.selected == "Mumbai") {
+        this.center = [72.8356, 18.9817];
+        this.zoom = 10
+      } else if (this.selected == "Nagpur") {
+        this.center = [79.0748, 21.005];
+        this.zoom = 8.5
+      } else if (this.selected == "Pune") {
+        this.center = [73.8493, 18.4594];
+        this.zoom = 8.5 
+      } else {
+        this.center = [103.8088623, 1.3459122];
+
+      }
+      this.createMap();
+    },
     isCompare() {
       this.createMap(this.isCompare);
       if (this.isCompare == false) {
@@ -69,8 +95,9 @@ export default {
           style: "mapbox://styles/mapbox/streets-v11",
           attributionControl: false,
           center: this.center,
-          zoom: 10.5,
+          zoom: this.zoom,
         });
+
         this.map.addControl(new mapboxgl.ScaleControl(), "bottom-right");
         this.map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
 
@@ -100,6 +127,9 @@ export default {
         if (isCompare && this.isMapview) {
           this.createMapCompare();
         }
+        if (this.isDashboard) {
+          this.addAoiToMap();
+        }
       } catch (err) {
         console.log("map error", err);
       }
@@ -120,7 +150,7 @@ export default {
         style: "mapbox://styles/mapbox/streets-v11",
         attributionControl: false,
         center: this.center,
-        zoom: 10.5,
+        zoom: this.zoom,
       });
       const container = "#comparison-container";
       this.map2 = new MapboxCompare(this.mapCompare, this.map, container, {});
@@ -128,6 +158,25 @@ export default {
     removeCompare() {
       this.mapCompare.remove();
       this.mapCompare = {};
+    },
+    addAoiToMap() {
+      let aoi = this.aois.filter((e) => e.name == this.selected);
+      const data = aoi[0].geometry;
+      this.map.on("load", () => {
+        this.map.addSource("aoi", {
+          type: "geojson",
+          data: data,
+        });
+        this.map.addLayer({
+          id: "aoi",
+          type: "line",
+          source: "aoi",
+          paint: {
+            "line-color": "#000",
+            "line-width": 2,
+          },
+        });
+      });
     },
   },
 };
