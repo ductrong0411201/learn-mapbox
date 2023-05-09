@@ -96,6 +96,7 @@ export default {
       const response = await fetch("https://greencover.eofactory.ai/api/v1/imageries/statistics?month=02&compare_month=01&compare_year=2023&year=2023&source=sentinel&overview_type=overall_green_cover&aoi_id=215");
       const jsonData = await response.json();
       this.resultData=jsonData.data
+      console.log(this.resultData);
       jsonData.data.green_cover_change_in_year.green_area['color'] = ['#409eff']
       jsonData.data.green_cover_change_in_year.green_area = [jsonData.data.green_cover_change_in_year.green_area]
       jsonData.data.green_cover_change_in_year.green_area['group'] = 'Green Cover'

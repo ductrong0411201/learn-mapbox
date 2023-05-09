@@ -25,6 +25,7 @@ export default {
     isCompare: { type: Boolean, default: false },
     isDashboard: { type: Boolean, default: false },
     isMapview: { type: Boolean, default: false },
+    aois: {}
   },
   data() {
     return {
@@ -39,51 +40,66 @@ export default {
         color: "#D80739",
       },
       mapCompare: {},
+      map2: {},
     };
   },
   mounted() {
     this.createMap();
   },
+  watch: {
+    isCompare() {
+      this.createMap(this.isCompare);
+      if (this.isCompare == false) {
+        this.mapCompare.remove();
+        this.map.remove();
+        this.map = {};
+        this.mapCompare = {};
+        this.map2.remove();
+        this.map2 = {};
+        this.createMap(false);
+      }
+    },
+  },
   methods: {
     createMap(isCompare) {
       try {
-          mapboxgl.accessToken = this.access_token;
-          this.map = new mapboxgl.Map({
-            container: "map",
-            style: "mapbox://styles/mapbox/streets-v11",
-            attributionControl: false,
-            center: this.center,
-            zoom: 10.5,
-          });
-          this.map.addControl(new mapboxgl.ScaleControl(), "bottom-right");
-          this.map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
+        mapboxgl.accessToken = this.access_token;
+        this.map = new mapboxgl.Map({
+          container: "map",
+          style: "mapbox://styles/mapbox/streets-v11",
+          attributionControl: false,
+          center: this.center,
+          zoom: 10.5,
+        });
+        this.map.addControl(new mapboxgl.ScaleControl(), "bottom-right");
+        this.map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
 
-          if (this.isMapview) {
-            const ruler = new RulerControl();
-            this.map.addControl(ruler, "bottom-right");
-            const draw = new MapboxDraw({
-              displayControlsDefault: false,
-              controls: {
-                polygon: true,
-              },
-              defaultMode: "draw_polygon",
-            });
-            this.map.addControl(draw, "bottom-right");
-          }
-          this.map.addControl(
-            new mapboxgl.GeolocateControl({
-              positionOptions: {
-                enableHighAccuracy: true,
-              },
-              trackUserLocation: true,
-              showUserHeading: true,
-            }),
-            "bottom-right"
-          );
-          this.map.on("click", this.handleMapClick);
-          if (isCompare && this.isMapview) {
-            this.createMapCompare();
-          }
+        if (this.isMapview) {
+          const ruler = new RulerControl();
+          this.map.addControl(ruler, "bottom-right");
+          const draw = new MapboxDraw({
+            displayControlsDefault: false,
+            controls: {
+              polygon: true,
+            },
+            defaultMode: "draw_polygon",
+          });
+          this.map.addControl(draw, "bottom-right");
+        }
+        this.map.addControl(
+          new mapboxgl.GeolocateControl({
+            positionOptions: {
+              enableHighAccuracy: true,
+            },
+            trackUserLocation: true,
+            showUserHeading: true,
+          }),
+          "bottom-right"
+        );
+        this.map.on("click", this.handleMapClick);
+        if (isCompare && this.isMapview) {
+          this.createMapCompare();
+        }
       } catch (err) {
         console.log("map error", err);
       }
@@ -98,17 +114,20 @@ export default {
         .addTo(this.map);
     },
     createMapCompare() {
-      this.compareMap = {};
       mapboxgl.accessToken = this.access_token;
       this.mapCompare = new mapboxgl.Map({
         container: "map-compare",
-        style: "mapbox://styles/mapbox/satellite-streets-v12",
+        style: "mapbox://styles/mapbox/streets-v11",
         attributionControl: false,
         center: this.center,
         zoom: 10.5,
       });
       const container = "#comparison-container";
-      this.map = new MapboxCompare(this.mapCompare, this.map, container, {});
+      this.map2 = new MapboxCompare(this.mapCompare, this.map, container, {});
+    },
+    removeCompare() {
+      this.mapCompare.remove();
+      this.mapCompare = {};
     },
   },
 };

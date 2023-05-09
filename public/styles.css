@@ -41,3 +41,6 @@ html {
   bottom: 32px;
   right: 92px;
 }
+.mapboxgl-compare {
+  background-color: #3887be !important;
+}

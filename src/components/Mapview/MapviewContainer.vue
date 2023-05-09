@@ -31,7 +31,7 @@
     <base-map
       ref="map"
       style="height: calc(100vh - 128px)"
-      :isCompare="isSlide"
+      :isCompare="isCompare"
       :isMapview="isMapview"
     ></base-map>
   </div>
@@ -54,13 +54,13 @@ export default {
       this.isOverlay = true;
       this.isCompare = false;
       this.isSync = false;
-      this.$refs.map.createMap(this.isCompare);
+      // this.$refs.map.createMap(this.isCompare);
     },
     openSlide() {
       this.isOverlay = false;
       this.isCompare = true;
       this.isSync = false;
-      this.$refs.map.createMap(this.isCompare);
+      // this.$refs.map.createMap(this.isCompare);
     },
     openSync() {
       this.isOverlay = false;
