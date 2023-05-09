@@ -102,6 +102,7 @@ export default {
       jsonData.data.green_cover_change_in_year.plant_health['group'] = 'Plant Health'
       jsonData.data.green_cover_change_in_year.green_density['group'] = 'Plant Density'
       this.result = [jsonData.data.green_cover_change_in_year.green_area, jsonData.data.green_cover_change_in_year.green_density, jsonData.data.green_cover_change_in_year.plant_health]
+      console.log(this.result)
     },
     async drawDasshboard() {
       var margin = { top: 10, right: 30, bottom: 20, left: 50 },
