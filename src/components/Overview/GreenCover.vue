@@ -53,15 +53,15 @@
                             {{ this.result.area_percent_change ? this.result.area_percent_change.toFixed(2) : 0 }}%
                         </span>
                         <i v-if=" this.result.area_percent_change > 0" aria-hidden="true" class="v-icon notranslate mdi mdi-menu-up theme--light green--text"
-                            style="font-size: 70px; margin-top: -30px;"></i>
+                            style="font-size: 70px; margin-top: -3vh;"></i>
                         <i v-else aria-hidden="true" class="v-icon notranslate mdi mdi-menu-down theme--light red--text"
-                            style="font-size: 70px; margin-bottom: -30px;"></i>
+                            style="font-size: 70px; margin-bottom: -3vh;"></i>
                         <div>
                             <span
                                 style="line-height: 3vh; font-size: 1.1vw; text-transform: uppercase; color: rgb(0, 0, 0);">
                                 Change in Green Cover Area
                             </span>
-                            <div style="height: 50px;">
+                            <div style="height: 5vh;">
                                 <span style="font-size: 18px; font-weight: bold; color: red;" class="pl-2">
                                     {{ this.result.area_change.toFixed(0) }} sqkm
                                     <span style="font-weight: normal; color: black;">
@@ -132,7 +132,7 @@ export default {
 
 .greencover_area {
     /* min-width: 200px; */
-    height: 80px;
+    height: 8vh;
     font-weight: 600;
     font-size: 2.7vw;
     color: rgb(137, 63, 242);
@@ -165,12 +165,12 @@ export default {
     background-color: rgb(255, 255, 255);
     margin: 20px;
     padding: 20px;
-    height: 200px 
+    height: 20vh 
 }
 
 .data {
     margin: 30px 10px 10px 10px;
-    height: 120px;
+    height: 12vh;
     border-top: 1px solid rgb(137, 63, 242);
     border-right: 1px solid rgb(137, 63, 242);
     border-bottom: 1px solid rgb(137, 63, 242);
