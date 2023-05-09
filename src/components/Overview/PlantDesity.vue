@@ -23,30 +23,30 @@
             <v-card class="box">
                 <div>
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span class="plant_health">
-                            PlantHealth
+                        <span class="green_density">
+                            Green Density
                         </span>
                         <b style="color: rgb(137, 63, 242);">sqkm</b>
                     </div>
                     <div v-for="(item, index) in plantHealth" :key="index" :style="{color: item.color[0], display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '5px 5px'}">
-                        <div style="width: 7vw; font-size: 13px; font-weight: bold;">{{ item.label }}</div>
+                        <div style="width: 7vw; font-size: 1.35vh; font-weight: bold;">{{ item.label }}</div>
                         <div :style="{height: '10px', width: '30%', backgroundColor: item.color[0]}"></div>
-                        <div style="width: 40px; font-size: 13px;">{{ item.data[1].toFixed(2) }}</div>
+                        <div style="width: 3vw; font-size: 1.35vh;">{{ item.data[1].toFixed(2) }}</div>
                     </div>
                 </div>
             </v-card>
             <v-card class="box">
                 <div>
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span class="plant_health">
-                            PlantHealth
+                        <span class="green_density">
+                            Green Density
                         </span>
                         <b style="color: rgb(137, 63, 242);">sqkm</b>
                     </div>
                     <div v-for="(item, index) in plantHealth" :key="index" :style="{color: item.color[0], display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '5px 5px'}">
-                        <div style="width: 7vw; font-size: 13px; font-weight: bold;">{{ item.label }}</div>
+                        <div style="width: 7vw; font-size: 1.35vh; font-weight: bold;">{{ item.label }}</div>
                         <div :style="{height: '10px', width: '30%', backgroundColor: item.color[0]}"></div>
-                        <div style="width: 40px; font-size: 13px;">{{ item.data[0].toFixed(2) }}</div>
+                        <div style="width: 3vw; font-size: 1.35vh;">{{ item.data[0].toFixed(2) }}</div>
                     </div>
                 </div>
             </v-card>
@@ -60,9 +60,9 @@
                         </span>
                     </div>
                     <div v-for="(item, index) in changePlant" :key="index" :style="{color: item.color, display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '5px 5px'}">
-                        <div style="width: 7vw; font-size: 13px; font-weight: bold;">{{ item.label }}</div>
+                        <div style="width: 7vw; font-size: 1.3vh; font-weight: bold;">{{ item.label }}</div>
                         <div :style="{height: '10px', width: '50%', backgroundColor: item.color}"></div>
-                        <div style="width: 80px; font-size: 13px;">
+                        <div style="width: 6vw; font-size: 1.3vh;">
                             {{ item.change_percent.toFixed(2) }}
                         <i v-if=" item.change_percent > 0" aria-hidden="true" class="v-icon notranslate mdi mdi-menu-up theme--light green--text"
                             style="font-size: 20px; "></i>
@@ -99,13 +99,13 @@ export default {
 <style>
 .change_plant{
     color: rgb(0, 0, 0);
-    font-size: 1.7vw;
+    font-size: 1.3vw;
     font-weight: bold;
     font-style: italic;
 }
-.plant_health {
+.green_density {
     color: rgb(137, 63, 242);
-    font-size: 1.7vw;
+    font-size: 1.5vw;
     font-weight: 80;
     font-style: italic;
 }

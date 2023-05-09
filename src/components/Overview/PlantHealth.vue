@@ -24,14 +24,14 @@
                 <div>
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span class="plant_health">
-                            PlantHealth
+                            Plant Health
                         </span>
                         <b style="color: rgb(137, 63, 242);">sqkm</b>
                     </div>
                     <div v-for="(item, index) in plantHealth" :key="index" :style="{color: item.color[0], display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '5px 5px'}">
-                        <div style="width: 7vw; font-size: 15px; font-weight: bold;">{{ item.label }}</div>
+                        <div style="width: 8vw; font-size: 1.3vh; font-weight: bold;">{{ item.label }}</div>
                         <div :style="{height: '10px', width: '30%', backgroundColor: item.color[0]}"></div>
-                        <div style="width: 40px; font-size: 15px;">{{ item.data[1].toFixed(2) }}</div>
+                        <div style="width: 3vw; font-size: 1.7vh;">{{ item.data[1].toFixed(2) }}</div>
                     </div>
                 </div>
             </v-card>
@@ -44,9 +44,9 @@
                         <b style="color: rgb(137, 63, 242);">sqkm</b>
                     </div>
                     <div v-for="(item, index) in plantHealth" :key="index" :style="{color: item.color[0], display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '5px 5px'}">
-                        <div style="width: 7vw; font-size: 15px; font-weight: bold;">{{ item.label }}</div>
+                        <div style="width: 8vw; font-size: 1.3vh; font-weight: bold;">{{ item.label }}</div>
                         <div :style="{height: '10px', width: '30%', backgroundColor: item.color[0]}"></div>
-                        <div style="width: 40px; font-size: 15px;">{{ item.data[0].toFixed(2) }}</div>
+                        <div style="width: 3vw; font-size: 1.7vh;">{{ item.data[0].toFixed(2) }}</div>
                     </div>
                 </div>
             </v-card>
@@ -55,14 +55,14 @@
             <v-card class="box">
                 <div>
                     <div>
-                        <span class="change_plant">
+                        <span class="change_plant_health">
                             % Change in Plant Health
                         </span>
                     </div>
                     <div v-for="(item, index) in changePlant" :key="index" :style="{color: item.color, display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '5px 5px'}">
-                        <div style="width: 7vw; font-size: 15px; font-weight: bold;">{{ item.label }}</div>
+                        <div style="width: 10vw; font-size: 1.7vh; font-weight: bold;">{{ item.label }}</div>
                         <div :style="{height: '10px', width: '50%', backgroundColor: item.color}"></div>
-                        <div style="width: 80px; font-size: 15px;">
+                        <div style="width: 6vw; font-size: 1.7vh;">
                             {{ item.change_percent.toFixed(2) }}
                         <i v-if=" item.change_percent > 0" aria-hidden="true" class="v-icon notranslate mdi mdi-menu-up theme--light green--text"
                             style="font-size: 20px; "></i>
@@ -97,7 +97,7 @@ export default {
 }
 </script>
 <style>
-.change_plant{
+.change_plant_health{
     color: rgb(0, 0, 0);
     font-size: 1.7vw;
     font-weight: bold;
