@@ -3,7 +3,7 @@
     <div class="flex">
       <!-- Map Display here -->
       <div class="map-holder" id="comparison-container">
-        <div id="map" class="map"></div>
+        <div id="map" class="map" style="z-index: 1"></div>
         <div id="map-compare" class="map"></div>
       </div>
     </div>
@@ -53,27 +53,27 @@ export default {
         this.center = [75.8031, 26.8948];
         this.zoom = 9;
       } else if (this.selected == "Jodhpur") {
-        this.center = [73.017110, 26.1703594];
+        this.center = [73.01711, 26.1703594];
         this.zoom = 8;
       } else if (this.selected == "Kota") {
         this.center = [76.1082, 25.1094];
-        this.zoom = 7
+        this.zoom = 7;
       } else if (this.selected == "Mumbai") {
         this.center = [72.8356, 18.9817];
-        this.zoom = 10
+        this.zoom = 10;
       } else if (this.selected == "Nagpur") {
         this.center = [79.0748, 21.005];
-        this.zoom = 8.5
+        this.zoom = 8.5;
       } else if (this.selected == "Pune") {
         this.center = [73.8493, 18.4594];
-        this.zoom = 8.5 
+        this.zoom = 8.5;
       } else {
         this.center = [103.8088623, 1.3459122];
-
       }
       this.createMap();
     },
     isCompare() {
+      console.log(this.isCompare);
       this.createMap(this.isCompare);
       if (this.isCompare == false) {
         this.mapCompare.remove();
@@ -155,10 +155,7 @@ export default {
       const container = "#comparison-container";
       this.map2 = new MapboxCompare(this.mapCompare, this.map, container, {});
     },
-    removeCompare() {
-      this.mapCompare.remove();
-      this.mapCompare = {};
-    },
+    removeCompare() {},
     addAoiToMap() {
       let aoi = this.aois.filter((e) => e.name == this.selected);
       const data = aoi[0].geometry;
